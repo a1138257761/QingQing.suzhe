@@ -10,12 +10,7 @@ const http = axios.create({
   }
 });
 
-export const {
-  _get: get,
-  _post: post,
-  _patch: patch,
-  _put: put,
-} = http;
+export const { _get: get, _post: post, _patch: patch, _put: put } = http;
 
 export default {
   install(Vue) {
