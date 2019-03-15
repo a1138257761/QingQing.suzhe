@@ -1,17 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
 
-const profile = process.env.VUE_APP_INFO;
+const fetchMap = JSON.parse(process.env.VUE_APP_FETCH_MAP);
 const http = axios.create({
-  baseURL: profile,
-  timeOut: 10000,
+  timeout: 3 * 60 * 1000, // 暂时修改超时时间，待后端优化
   validateStatus(status) {
-    const bool = status >= 200 && status < 300;
-    return bool;
+    return status >= 200 && status < 300;
   }
 });
 
-export const { _get: get, _post: post, _patch: patch, _put: put } = http;
+const {
+  get: _get, post: _post, delete: _delete, put: _put, patch: _patch,
+} = http;
 
+export { _get, _post, _put, _delete, _patch };
 export default {
   install(Vue) {
     Vue.prototype.$http = http;
