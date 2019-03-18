@@ -5,12 +5,17 @@
         <el-row align="middle" type="flex">
           <el-col :span="6" class="bbe6">
             <p>
-              <img class="logo" src="../assets/u20.png" />
+              <!-- <img class="logo" src="../assets/u20.png" /> -->
               <!-- <span>白金软件</span> -->
             </p>
           </el-col>
           <el-col :span="14">
-            <el-menu active-text-color="#E3685C" class="h60" mode="horizontal" @select="handleTopSelect">
+            <el-menu
+              active-text-color="#E3685C"
+              class="h60"
+              mode="horizontal"
+              @select="handleTopSelect"
+            >
               <!-- eslint-disable-next-line -->
               <el-menu-item :index="menu.key" :key="menu.key" v-for="menu of topMenu">{{menu.name}}</el-menu-item>
             </el-menu>
@@ -35,7 +40,7 @@
         <Menu :menuData="sideMenu" :baseURL="`/system-${currentSystem}`"></Menu>
       </el-aside>
       <el-main>
-        <router-view />
+        <router-view id="currentSystem"/>
       </el-main>
     </el-container>
   </div>
@@ -60,6 +65,11 @@ export default {
     ...mapGetters(["sideMenu"])
   },
   created() {
+    const prefixRE = /^\/(\w+)Api/;
+    const exec = prefixRE.exec("/ccApi/BasicData/Orgs/${id}/TransUsers");
+    const [prefix, key] = exec
+    console.log(exec);
+    console.log(prefix, key);
     this.handleLogin();
     this.getTopMenu();
   },
@@ -68,7 +78,7 @@ export default {
       async handler(sys) {
         if (!sys) return;
         this.getPermission(sys);
-        console.log(this.sideMenu);
+        this.$router.push({ name: `${sys}-home` });
       },
       immediate: true
     }

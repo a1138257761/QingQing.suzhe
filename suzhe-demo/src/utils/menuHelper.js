@@ -7,7 +7,7 @@ export const menuFilter = (string, baseURL) => {
   if (_.isEmpty(string)) return "";
   const arr = _.split(string, ".");
   // arr = ["place", "myList"]
-  const path = _.slice(arr, 1);
+  const path = _.slice(arr, 2);
   // path = place
   return `${baseURL}/${_.join(path, "/")}`;
   // /system-cc/place

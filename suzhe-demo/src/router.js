@@ -15,14 +15,22 @@ export default new Router({
       component: () => import("./views/AuthCheck.vue"),
       children: [
         {
-          path: "/welcome",
-          component: () => import("./views/AuthCheck.vue")
+          path: "welcome",
+          name: "welcome",
+          component: () => import("./views/Welcome.vue")
         }
       ].concat(
         ["cc", "pf"].map(sys => ({
-          name: sys,
           path: `system-${sys}`,
-          component: PureContainer
+          name: sys,
+          component: PureContainer,
+          children: [
+            {
+              path: `system-${sys}/home`,
+              name: `${sys}-home`,
+              component: () => import("./views/Welcome.vue")
+            }
+          ]
         }))
       )
     }

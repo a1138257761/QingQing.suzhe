@@ -9,7 +9,7 @@ const router = {
         {
           path: "list",
           name: "place-list",
-          component: () => import("./place/List.vue")
+          component: () => import("../Welcome.vue")
         }
       ]
     }

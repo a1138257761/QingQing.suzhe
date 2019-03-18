@@ -6,7 +6,6 @@ import {
   SELECT_CURRENT_SYSTEM,
   GET_PERMISSION_SUCCESS
 } from "./mutations";
-import { _get } from "../http";
 
 Vue.use(Vuex);
 
@@ -68,23 +67,23 @@ export default new Vuex.Store({
                 name: "考勤设置",
                 children: [
                   {
-                    key: "cc.place.myList",
+                    key: "place.myList",
                     name: "考勤体系",
                     children: [
                       {
-                        path: "cc.place.myList.management",
+                        path: "place.myList.management",
                         name: "考勤期段管理",
                         children: []
                       },
                       {
-                        path: "cc.place.myList.timesetting",
+                        path: "place.myList.timesetting",
                         name: "工时设置",
                         children: []
                       }
                     ]
                   },
                   {
-                    key: "cc.place.list",
+                    key: "place.list",
                     name: "考勤地点",
                     children: []
                   }
@@ -101,7 +100,6 @@ export default new Vuex.Store({
               }
             });
           }
-          // const { data } = await _get("path");
           resolve();
         } catch (err) {
           reject(err);
