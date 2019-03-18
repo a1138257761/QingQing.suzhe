@@ -1,5 +1,6 @@
 <script type="text/jsx">
 import _ from 'lodash';
+import { menuFilter } from "../utils/menuHelper";
 
 export default {
   name: 'cc-comp-menu',
@@ -48,11 +49,11 @@ export default {
         key, name, children,
       }) =>
         (_.isEmpty(children) ? (
-          <el-menu-item>
+          <el-menu-item index={ menuFilter(key, this.baseURL) }>
             <span>{name}</span>
           </el-menu-item>
         ) : (
-          <el-submenu>
+          <el-submenu index={ menuFilter(key, this.baseURL) }>
             <template slot="title">
               <div>
                 <span>{name}</span>
@@ -71,10 +72,12 @@ export default {
 </script>
 
 <style lang="scss">
+.hpct100 {
+  height: 100%;
+}
 #menu {
   box-sizing: border-box;
   border-right: 1px solid #e6e6e6;
-
   .el-main,
   .el-header {
     padding: 0;

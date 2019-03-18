@@ -61,21 +61,31 @@ export default new Vuex.Store({
     [GET_PERMISSION]({ commit }, sys) {
       return new Promise(async (resolve, reject) => {
         try {
-          let path;
           if (sys === "cc") {
             const menu = [
               {
                 key: "place",
-                name: "场地",
+                name: "考勤设置",
                 children: [
                   {
-                    key: "myList",
-                    name: "我的单据",
-                    children: []
+                    key: "cc.place.myList",
+                    name: "考勤体系",
+                    children: [
+                      {
+                        path: "cc.place.myList.management",
+                        name: "考勤期段管理",
+                        children: []
+                      },
+                      {
+                        path: "cc.place.myList.timesetting",
+                        name: "工时设置",
+                        children: []
+                      }
+                    ]
                   },
                   {
-                    key: "list",
-                    name: "所有单据",
+                    key: "cc.place.list",
+                    name: "考勤地点",
                     children: []
                   }
                 ]
@@ -91,8 +101,8 @@ export default new Vuex.Store({
               }
             });
           }
-          const { data } = await _get("path");
-          resolve(data);
+          // const { data } = await _get("path");
+          resolve();
         } catch (err) {
           reject(err);
         }

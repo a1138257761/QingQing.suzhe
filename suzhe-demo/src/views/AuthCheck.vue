@@ -6,7 +6,6 @@
           <el-col :span="6" class="bbe6">
             <p>
               <img class="logo" src="../assets/u20.png" />
-              {{ currentSystem }}
               <!-- <span>白金软件</span> -->
             </p>
           </el-col>
@@ -32,6 +31,12 @@
       </el-header>
     </el-container>
     <el-container class="left-container">
+      <el-aside class="side-menu" v-if="sideMenu && sideMenu.length > 0">
+        <Menu :menuData="sideMenu" :baseURL="`/system-${currentSystem}`"></Menu>
+      </el-aside>
+      <el-main>
+        <router-view />
+      </el-main>
     </el-container>
   </div>
 </template>
@@ -63,6 +68,7 @@ export default {
       async handler(sys) {
         if (!sys) return;
         this.getPermission(sys);
+        console.log(this.sideMenu);
       },
       immediate: true
     }
@@ -139,5 +145,12 @@ export default {
 .left-container {
   width: 220px;
   height: 1200px;
+}
+
+.side-menu {
+  width: 220px;
+  margin: 0;
+  padding: 0;
+  // background-color: #eceaea;
 }
 </style>

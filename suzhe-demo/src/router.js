@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
+import PureContainer from "./components/PureContainer.vue";
+import "./views/cc/router";
 
 Vue.use(Router);
 
@@ -9,17 +11,20 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "auth-check",
-      component: () => import("./views/AuthCheck.vue")
+      name: "index",
+      component: () => import("./views/AuthCheck.vue"),
+      children: [
+        {
+          path: "/welcome",
+          component: () => import("./views/AuthCheck.vue")
+        }
+      ].concat(
+        ["cc", "pf"].map(sys => ({
+          name: sys,
+          path: `system-${sys}`,
+          component: PureContainer
+        }))
+      )
     }
-    // {
-    //   path: "/about",
-    //   name: "about",
-    //   // route level code-splitting
-    //   // this generates a separate chunk (about.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () =>
-    //     import(/* webpackChunkName: "about" */ "./views/About.vue")
-    // }
   ]
 });
