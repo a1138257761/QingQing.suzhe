@@ -26,4 +26,7 @@
     }
   }
 }
+.my-test {
+  font-size: 14px;
+}
 </style>
